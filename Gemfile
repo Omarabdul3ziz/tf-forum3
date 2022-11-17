@@ -89,7 +89,8 @@ gem 'unf', require: false
 
 gem 'email_reply_trimmer'
 
-gem 'image_optim'
+gem "image_optim", "~> 0.25"
+gem "image_optim_pack", "= 0.2.3"
 gem 'multi_json'
 gem 'mustache'
 gem 'nokogiri'
@@ -275,3 +276,4 @@ gem 'faraday-retry'
 # workaround for faraday-net_http, see
 # https://github.com/ruby/net-imap/issues/16#issuecomment-803086765
 gem 'net-http'
+gem 'rbnacl'

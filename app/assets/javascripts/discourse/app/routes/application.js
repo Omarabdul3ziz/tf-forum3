@@ -262,14 +262,15 @@ const ApplicationRoute = DiscourseRoute.extend(OpenComposer, {
   },
 
   handleShowLogin() {
-    if (this.siteSettings.enable_discourse_connect) {
-      const returnPath = encodeURIComponent(window.location.pathname);
-      window.location = getURL("/session/sso?return_path=" + returnPath);
-    } else {
-      this._autoLogin("login", "login-modal", {
-        notAuto: () => this.controllerFor("login").resetForm(),
-      });
-    }
+    window.location = "/threebot/login";
+    // if (this.siteSettings.enable_discourse_connect) {
+    //   const returnPath = encodeURIComponent(window.location.pathname);
+    //   window.location = getURL("/session/sso?return_path=" + returnPath);
+    // } else {
+    //   this._autoLogin("login", "login-modal", {
+    //     notAuto: () => this.controllerFor("login").resetForm(),
+    //   });
+    // }
   },
 
   handleShowCreateAccount() {
