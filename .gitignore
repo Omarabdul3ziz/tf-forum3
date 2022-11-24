@@ -4,6 +4,9 @@
 /log
 /tmp
 
+__pycache__
+flask_sessionstore
+
 /.bundle
 /.env
 /.procfile
