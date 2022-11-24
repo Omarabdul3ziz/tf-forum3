@@ -107,6 +107,10 @@ docker run -d \
     discourse/discourse_dev:release /sbin/boot
 
 if [ "${initialize}" = "initialize" ]; then
+
+    echo "Installing apt deps"
+    "${SCRIPTPATH}/install_deps"
+
     echo "Installing gems..."
     "${SCRIPTPATH}/bundle" install
 
@@ -116,4 +120,7 @@ if [ "${initialize}" = "initialize" ]; then
 
     echo "Creating admin user..."
     "${SCRIPTPATH}/rake" admin:create
+
+    echo "Run 3bot server..."
+    "${SCRIPTPATH}/3bot"
 fi
