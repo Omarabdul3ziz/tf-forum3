@@ -4,6 +4,7 @@
 /log
 /tmp
 
+# python app
 __pycache__
 flask_sessionstore
 

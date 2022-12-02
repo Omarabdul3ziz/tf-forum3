@@ -13,8 +13,6 @@ class ThreebotController < ApplicationController
   skip_before_action :check_xhr, only: [:callback]
   helper_method :sign_in
 
-  # put the env var
-  #  @@authUrl = ENV["THREEBOT_URL"]
   @@authUrl = "https://login.threefold.me"
 
   def login
@@ -27,7 +25,7 @@ class ThreebotController < ApplicationController
     net.use_ssl = false
     res = net.get("/pub_key")
     if res.code != "200"
-      return render json: { "message": "can not get pelleptic ublic key for this app" }, status: res.code
+      return render json: { "message": "can not get public key for this app" }, status: res.code
     end
     data = JSON.parse(res.body)
     pk = data["pk"]
@@ -44,14 +42,6 @@ class ThreebotController < ApplicationController
   end
 
   def callback
-    puts ""
-    puts ""
-    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    puts "called back"
-    puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-    puts ""
-    puts ""
-
     err = params[:error]
     if err == "CancelledByUser"
       Rails.logger.warn "Login attempt canceled by user"
@@ -60,15 +50,6 @@ class ThreebotController < ApplicationController
     net = Net::HTTP.new("127.0.0.1", 5000)
     net.use_ssl = false
     res = net.get("/data?#{request.query_parameters.to_query}")
-
-    puts ""
-    puts ""
-    puts ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-    puts "response from /data"
-    puts JSON.parse(res.body)
-    puts "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
-    puts ""
-    puts ""
 
     if res.code != "200"
       return render json: JSON.parse(res.body), status: res.code
